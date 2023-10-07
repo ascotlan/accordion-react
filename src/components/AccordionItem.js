@@ -1,18 +1,21 @@
-import { useState } from "react";
-
-export default function AccordionItem({ num, title, text }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
-
+export default function AccordionItem({
+  index,
+  title,
+  isOpen,
+  onOpenItem,
+  children,
+  icon,
+  num,
+}) {
   return (
-    <li onClick={handleOpen} className={`item${isOpen ? " open" : ""}`}>
-      <p className="number">{num < 9 ? `0${num}` : num}</p>
+    <li
+      onClick={() => onOpenItem(index)}
+      className={`item${isOpen ? " open" : ""}`}
+    >
+      <p className="number">{num}</p>
       <p className="title">{title}</p>
-      <p className="icon">{isOpen ? "-" : "+"}</p>
-      {isOpen && <div className="content-box">{text}</div>}
+      <p className="icon">{icon}</p>
+      {isOpen && <div className="content-box">{children}</div>}
     </li>
   );
 }
